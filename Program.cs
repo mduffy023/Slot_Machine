@@ -11,27 +11,28 @@ namespace Slot_Machine
 
             int[,] slots = new int [3, 3];
 
-            slots[0, 0] = 1;
-            slots[1, 0] = 0;
-            slots[2, 0] = 2;
-            slots[0, 1] = 2;
-            slots[1, 1] = 0;
-            slots[2, 1] = 1;
-            slots[0, 2] = 0;
-            slots[1, 2] = 2;
-            slots[2, 2] = 1;
-
             Random  rand = new Random();
+
+            int Money;
+
+            Console.WriteLine("how much money would you like to insert? ");
+
+            Money = Convert.ToInt32(Console.ReadLine());
 
             while (true)
             {
-                if (Console.KeyAvailable)
-                {
-                    Console.ReadKey(true);
-                    break;
-                }
+             
+                    Console.WriteLine($"Balance ${Money}");
 
+                    Console.WriteLine($"would you like to play? press enter");
 
+                 if (Console.ReadKey(true).Key != ConsoleKey.Enter)
+                 {
+                  break;
+                 }
+
+                  Money--;
+                  
                 //loops through each row of the slots array
                 for (int i = 0; i < slots.GetLength(0); i++)
                 {
@@ -54,7 +55,7 @@ namespace Slot_Machine
                     }
                       Console.WriteLine();
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }          
         }
     }
