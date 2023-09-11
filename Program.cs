@@ -62,12 +62,12 @@ namespace Slot_Machine
 
                 if (slots[1,0] == slots[1,1] && slots[1,1] == slots[1,2])
                 {
-                    Console.Write("YOU WIN!");
+                    Console.WriteLine("YOU WIN!");
                     Money++;
                 }
                 if(Money == 0)
                 {
-                    Console.Write("Would you like to insert more money or preess any key to exit");
+                    Console.WriteLine("YOU LOSE! Would you like to insert more money or preess any key to exit");
 
                     Money = Convert.ToInt32(Console.ReadLine());
                 }
