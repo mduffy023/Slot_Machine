@@ -6,70 +6,72 @@ namespace Slot_Machine
     internal class Program
     {
         static void Main(string[] args)
-        {
+        {  
+            const int UPPER_LIMIT = 3; 
+
             Console.WriteLine("Slot Machine Game");
 
-            int[,] slots = new int [3, 3];
+            int[,] slots = new int[3, 3];
 
-            Random  rand = new Random();
+            Random rand = new Random();
 
-            int Money;
+            int money;
 
-            Console.WriteLine("how much money would you like to insert? ");
+            Console.WriteLine("How much money would you like to insert? ");
 
-            Money = Convert.ToInt32(Console.ReadLine());
+            money = Convert.ToInt32(Console.ReadLine());
 
-            while (Money > 0)
-            {              
-                
-             Console.WriteLine($"Balance ${Money}");
-
-            if (Console.ReadKey(true).Key != ConsoleKey.Enter)
-               {
-                 break;
-               }
-
-               Money--;
-                  
-                //loops through each row of the slots array
-            for (int i = 0; i < slots.GetLength(0); i++)
+            while (money > 0)
             {
-                 //loops through each colum of the slots array for the curret row 
-                for (int j = 0; j < slots.GetLength(1); j++)
+
+                Console.WriteLine($"Balance ${money}");
+
+                if (Console.ReadKey(true).Key != ConsoleKey.Enter)
                 {
-                        //shift the nums between 0, 1, 2
-                        int shiftNums = rand.Next(0, 3);
-                        slots[i, j] = (slots[i,j] + shiftNums) % 3 ;                   
+                    break;
                 }
 
-                Console.Clear();
-            }
-             
-            for (int i = 0; i < slots.GetLength(0); i++)
-            {
-               for (int j = 0; j < slots.GetLength(1); j++)
-               {
+                money--;
 
-                Console.Write(slots[i, j] + " ");
+                //loops through each row of the slots array
+                for (int i = 0; i < slots.GetLength(0); i++)
+                {
+                    //loops through each colum of the slots array for the curret row 
+                    for (int j = 0; j < slots.GetLength(1); j++)
+                    {
+                        //shift the nums between 0, 1, 2
+                        int shiftNums = rand.Next(0, UPPER_LIMIT);
+                        slots[i, j] = (slots[i, j] + shiftNums) % 3;
+                    }
 
-               }
+                    Console.Clear();
+                }
 
-                Console.WriteLine();
-            }
+                for (int i = 0; i < slots.GetLength(0); i++)
+                {
+                    for (int j = 0; j < slots.GetLength(1); j++)
+                    {
 
-                if (slots[1,0] == slots[1,1] && slots[1,1] == slots[1,2])
+                        Console.Write(slots[i, j] + " ");
+
+                    }
+
+                    Console.WriteLine();
+                }
+
+                if (slots[1, 0] == slots[1, 1] && slots[1, 1] == slots[1, 2])
                 {
                     Console.WriteLine("YOU WIN!");
-                    Money++;
+                    money++;
                 }
-                if(Money == 0)
+                if (money == 0)
                 {
                     Console.WriteLine("YOU LOSE! Would you like to insert more money or preess any key to exit");
 
-                    Money = Convert.ToInt32(Console.ReadLine());
+                    money = Convert.ToInt32(Console.ReadLine());
                 }
                 Thread.Sleep(500);
-            }          
+            }
         }
     }
 }
