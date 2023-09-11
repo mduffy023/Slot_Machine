@@ -20,12 +20,9 @@ namespace Slot_Machine
             Money = Convert.ToInt32(Console.ReadLine());
 
             while (Money > 0)
-            {    
-             
+            {              
                 
              Console.WriteLine($"Balance ${Money}");
-
-             Console.WriteLine($"would you like to play? press enter to continue");
 
             if (Console.ReadKey(true).Key != ConsoleKey.Enter)
                {
@@ -38,7 +35,7 @@ namespace Slot_Machine
             for (int i = 0; i < slots.GetLength(0); i++)
             {
                  //loops through each colum of the slots array for the curret row 
-                for (int j = 0; j < slots.GetLength(0); j++)
+                for (int j = 0; j < slots.GetLength(1); j++)
                 {
                         //shift the nums between 0, 1, 2
                         int shiftNums = rand.Next(0, 3);
@@ -48,7 +45,7 @@ namespace Slot_Machine
                 Console.Clear();
             }
              
-            for (int i = 0; i < slots.GetLength(1); i++)
+            for (int i = 0; i < slots.GetLength(0); i++)
             {
                for (int j = 0; j < slots.GetLength(1); j++)
                {
