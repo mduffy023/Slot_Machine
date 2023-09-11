@@ -58,22 +58,14 @@ namespace Slot_Machine
 
                     Console.WriteLine();
                 }
+
                 for (int i = 0; i < UPPER_LIMIT; i++)
-                if (slots[i, 0] == slots[i, 1] && slots[i, 1] == slots[i, 2])
-                {
-                    Console.WriteLine("YOU WIN!");
-                    money++;
-                }
-                //if (slots[1, 0] == slots[1, 1] && slots[1, 1] == slots[1, 2])
-                //{
-                //    Console.WriteLine("YOU WIN!");
-                //    money++;
-                //}
-                //if (slots[2, 0] == slots[2, 1] && slots[2, 1] == slots[2, 2])
-                //{
-                //    Console.WriteLine("YOU WIN!");
-                //    money++;
-                //}
+                    if (slots[i, 0] == slots[i, 1] && slots[i, 1] == slots[i, 2])
+                    {
+                        Console.WriteLine("YOU WIN!");
+                        money++;
+                    }
+
                 if (money == 0)
                 {
                     Console.WriteLine("YOU LOSE! Would you like to insert more money or preess any key to exit");
