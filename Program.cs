@@ -19,7 +19,6 @@ namespace Slot_Machine
 
             while (money > 0)
             {
-
                 Console.WriteLine($"Balance ${money}");
                 Console.WriteLine($"Press Enter to start spin");
 
@@ -27,9 +26,7 @@ namespace Slot_Machine
                 {
                     break;
                 }
-
                 money--;
-
                 //loops through each row of the slots array
                 for (int i = 0; i < slots.GetLength(0); i++)
                 {
@@ -40,10 +37,8 @@ namespace Slot_Machine
                         int shiftNums = rand.Next(0, UPPER_LIMIT);
                         slots[i, j] = (slots[i, j] + shiftNums) % 3;
                     }
-
                     Console.Clear();
                 }
-
                 for (int i = 0; i < slots.GetLength(0); i++)
                 {
                     for (int j = 0; j < slots.GetLength(1); j++)
@@ -55,14 +50,12 @@ namespace Slot_Machine
 
                     Console.WriteLine();
                 }
-
                 for (int i = 0; i < UPPER_LIMIT; i++)
                     if (slots[i, 0] == slots[i, 1] && slots[i, 1] == slots[i, 2])
                     {
                         Console.WriteLine("YOU WIN!");
                         money++;
                     }
-
                 if (money == 0)
                 {
                     Console.WriteLine("YOU LOSE! Would you like to insert more money or preess any key to exit");
