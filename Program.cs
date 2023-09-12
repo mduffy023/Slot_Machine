@@ -50,12 +50,25 @@ namespace Slot_Machine
 
                     Console.WriteLine();
                 }
-                for (int i = 0; i < UPPER_LIMIT; i++)
-                    if (slots[i, 0] == slots[i, 1] && slots[i, 1] == slots[i, 2])
+                for (int i = 0; i < slots.GetLength(0); i++)
+                {
+                    int refValue = slots[i, 0];
+                    bool isMatchingRow = true;
+
+                    for (int j = 0;j < slots.GetLength(1); j++)            
                     {
-                        Console.WriteLine("YOU WIN!");
-                        money++;
+                        if(slots[i, j] != refValue)
+                        {
+                            isMatchingRow = false;
+                            break;
+                        }                    
+                    }                  
+                    if (isMatchingRow) 
+                    {
+                        Console.WriteLine($"You WIN! row matches on {(i+1)}");
+                        money += 3;
                     }
+                }
                 if (money == 0)
                 {
                     Console.WriteLine("YOU LOSE! Would you like to insert more money or preess any key to exit");
