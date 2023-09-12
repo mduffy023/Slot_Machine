@@ -12,19 +12,16 @@ namespace Slot_Machine
             Console.WriteLine("Slot Machine Game");
 
             int[,] slots = new int[3, 3];
-
             Random rand = new Random();
 
-            int money;
-
             Console.WriteLine("How much money would you like to insert? ");
-
-            money = Convert.ToInt32(Console.ReadLine());
+            int money = Convert.ToInt32(Console.ReadLine());
 
             while (money > 0)
             {
 
                 Console.WriteLine($"Balance ${money}");
+                Console.WriteLine($"Press Enter to start spin");
 
                 if (Console.ReadKey(true).Key != ConsoleKey.Enter)
                 {
