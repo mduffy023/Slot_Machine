@@ -7,7 +7,8 @@ namespace Slot_Machine
     {
         static void Main(string[] args)
         {
-            const int UPPER_LIMIT = 3;
+            const int ROWS = 3;
+            const int COLUMNS = 3;
 
             Console.WriteLine("Slot Machine Game");
 
@@ -34,7 +35,7 @@ namespace Slot_Machine
                     for (int j = 0; j < slots.GetLength(1); j++)
                     {
                         //shift the nums between 0, 1, 2
-                        int shiftNums = rand.Next(0, UPPER_LIMIT);
+                        int shiftNums = rand.Next(0, ROWS);
                         slots[i, j] = (slots[i, j] + shiftNums) % 3;
                     }
                     Console.Clear();
@@ -50,14 +51,15 @@ namespace Slot_Machine
 
                     Console.WriteLine();
                 }
-                for (int i = 0; i < slots.GetLength(0); i++)
+                //row check
+                for (int indexRow = 0; indexRow < slots.GetLength(0); indexRow++)
                 {
-                    int refValue = slots[i, 0];
+                    int refValue = slots[indexRow, 0];
                     bool isMatchingRow = true;
 
-                    for (int j = 0;j < slots.GetLength(1); j++)            
+                    for (int indexColumn = 0; indexColumn < slots.GetLength(1); indexColumn++)            
                     {
-                        if(slots[i, j] != refValue)
+                        if(slots[indexRow, indexColumn] != refValue)
                         {
                             isMatchingRow = false;
                             break;
@@ -65,9 +67,44 @@ namespace Slot_Machine
                     }                  
                     if (isMatchingRow) 
                     {
-                        Console.WriteLine($"You WIN! row matches on {(i+1)}");
-                        money += 3;
+                        Console.WriteLine($"You WIN! Row matches on {(indexRow+1)}");
+                        money ++;
                     }
+                }
+                //column check
+                for (int indexColumn = 0; indexColumn < COLUMNS; indexColumn++)
+                {
+                    int refValue = slots[indexColumn, 0];
+                    bool isMatchingColumn = true;
+                    for (int indexRow = 0; indexRow < ROWS; indexRow++)
+                    {
+                        if (slots[indexRow, indexColumn] != refValue)
+                        {
+                            isMatchingColumn = false;
+                            break;
+                        }
+                    }
+                    if(isMatchingColumn)
+                    {
+                        Console.WriteLine($"You WIN! Columm matches on {(indexColumn + 1)}");
+                        money++;
+                    }
+                }
+                //main diagonal checks 
+                bool MainDiagonalMatch = true;
+                int mainDigonalRef = slots[0, 0];
+                for (int indexRow = 0; indexRow < ROWS; indexRow++)
+                {
+                    if (slots[indexRow, indexRow] != mainDigonalRef)
+                    {
+                        MainDiagonalMatch = false;
+                        break;
+                    }
+                }
+                if (MainDiagonalMatch)
+                {
+                   Console.WriteLine("You WIN! Main Diagonal Matches!");
+                    money++;
                 }
                 if (money == 0)
                 {
