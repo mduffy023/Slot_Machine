@@ -22,10 +22,19 @@ namespace Slot_Machine
             {
                 Console.WriteLine($"Balance ${money}");
                 Console.WriteLine($"Press Enter to start spin");
-
-                if (Console.ReadKey(true).Key != ConsoleKey.Enter)
+                while (true)
                 {
-                    break;
+                    ConsoleKey pressedKey = Console.ReadKey(true).Key;
+
+                    if (pressedKey == ConsoleKey.Enter)
+                    {
+                        break;
+                    }
+                    else 
+                    { 
+                        Console.WriteLine("Please only press Enter.");
+                       
+                    }
                 }
                 money--;
                 //loops through each row of the slots array
