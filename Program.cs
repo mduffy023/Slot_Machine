@@ -12,7 +12,7 @@ namespace Slot_Machine
 
             Console.WriteLine("Slot Machine Game");
 
-            int[,] slots = new int[3, 3];
+            int[,] slots = new int[ROWS, COLUMNS];
             Random rand = new Random();
 
             Console.WriteLine("How much money would you like to insert? ");
@@ -22,6 +22,7 @@ namespace Slot_Machine
             {
                 Console.WriteLine($"Balance ${money}");
                 Console.WriteLine($"Press Enter to start spin");
+
                 while (true)
                 {
                     ConsoleKey pressedKey = Console.ReadKey(true).Key;
@@ -31,12 +32,12 @@ namespace Slot_Machine
                         break;
                     }
                     else 
-                    { 
-                        Console.WriteLine("Please only press Enter.");
-                       
+                    {
+                        Console.WriteLine("Please only press Enter.");                     
                     }
                 }
                 money--;
+
                 //loops through each row of the slots array
                 for (int i = 0; i < slots.GetLength(0); i++)
                 {
@@ -49,6 +50,7 @@ namespace Slot_Machine
                     }
                     Console.Clear();
                 }
+
                 for (int i = 0; i < slots.GetLength(0); i++)
                 {
                     for (int j = 0; j < slots.GetLength(1); j++)
@@ -60,6 +62,7 @@ namespace Slot_Machine
 
                     Console.WriteLine();
                 }
+
                 //row check
                 for (int indexRow = 0; indexRow < slots.GetLength(0); indexRow++)
                 {
@@ -80,6 +83,7 @@ namespace Slot_Machine
                         money ++;
                     }
                 }
+
                 //column check
                 for (int indexColumn = 0; indexColumn < COLUMNS; indexColumn++)
                 {
@@ -93,6 +97,7 @@ namespace Slot_Machine
                             break;
                         }
                     }
+
                     if(isMatchingColumn)
                     {
                         Console.WriteLine($"You WIN! Columm matches on {(indexColumn + 1)}");
@@ -110,11 +115,13 @@ namespace Slot_Machine
                         break;
                     }
                 }
+
                 if (MainDiagonalMatch)
                 {
                    Console.WriteLine("You WIN! Main Diagonal Matches!");
                     money++;
                 }
+
                 if (money == 0)
                 {
                     Console.WriteLine("YOU LOSE! Would you like to insert more money or preess any key to exit");
