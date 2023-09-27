@@ -154,12 +154,7 @@ namespace Slot_Machine
                     {
                         money += additionalMoney;
                     }
-                    else
-                    {
-                        break;
-                    }
                 }
-
                 Thread.Sleep(500);
             }
         }
