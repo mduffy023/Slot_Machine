@@ -167,14 +167,14 @@ namespace Slot_Machine
         // Helper method to display the selected lines
         static void DisplaySelectedLines(int[,] slots, char lineType, int lineCount)
         {
-            int ROWS = slots.GetLength(0);
-            int COLUMNS = slots.GetLength(1);
+            int rows = slots.GetLength(0);
+            int columns = slots.GetLength(1);
 
             if (lineType == 'H')
             {
                 for (int indexRow = 0; indexRow < lineCount; indexRow++)
                 {
-                    for (int indexCol = 0; indexCol < COLUMNS; indexCol++)
+                    for (int indexCol = 0; indexCol < columns; indexCol++)
                     {
                         Console.Write(slots[indexRow, indexCol] + " ");
                     }
@@ -183,7 +183,7 @@ namespace Slot_Machine
             }
             else if (lineType == 'V')
             {
-                for (int indexRow = 0; indexRow < ROWS; indexRow++)
+                for (int indexRow = 0; indexRow < rows; indexRow++)
                 {
                     for (int indexCol = 0; indexCol < lineCount; indexCol++)
                     {
@@ -194,11 +194,11 @@ namespace Slot_Machine
             }
             //else // Diagonal
             //{
-            //    for (int i = 0; i < ROWS; i++)
+            //    for (int i = 0; i < rows; i++)
             //    {
-            //        for (int j = 0; j < COLUMNS; j++)
+            //        for (int j = 0; j < columns; j++)
             //        {
-            //            if (i == j || i + j == COLUMNS - 1)
+            //            if (i == j || i + j == columns - 1)
             //            {
             //                Console.Write(slots[i, j] + " ");
             //            }
@@ -207,7 +207,7 @@ namespace Slot_Machine
             //                Console.Write("  ");
             //            }
             //        }
-                    Console.WriteLine();
+            Console.WriteLine();
                 }
             }
         }
