@@ -21,11 +21,11 @@ namespace Slot_Machine
             Random rand = new Random();
 
             Console.WriteLine("How much money would you like to insert? ");
-            int money = Convert.ToInt32(Console.ReadLine());
+            int remainingMoney = Convert.ToInt32(Console.ReadLine());
 
-            while (money > 0)
+            while (remainingMoney > 0)
             {
-                Console.WriteLine($"Balance ${money}");
+                Console.WriteLine($"Balance ${remainingMoney}");
 
                 char lineType;
                 while (true)
@@ -39,14 +39,14 @@ namespace Slot_Machine
                 }
 
                 Console.WriteLine($"Choose the number of lines you would like to play (1 to {Math.Min(ROWS, COLUMNS)}) ");
-                int lineCount;
+                int linesToPlay;
                 while (true)
                 {
                     try
                     {
-                        lineCount = Convert.ToInt32(Console.ReadLine());
+                        linesToPlay = Convert.ToInt32(Console.ReadLine());
                   
-                        if (lineCount >= 1 && lineCount <= Math.Min(ROWS, COLUMNS) && lineCount <= money)
+                        if (linesToPlay >= 1 && linesToPlay <= Math.Min(ROWS, COLUMNS) && linesToPlay <= remainingMoney)
                         {
                             break;
                         }
@@ -64,7 +64,7 @@ namespace Slot_Machine
                 Console.WriteLine("Press Enter to start spin");
                 while (Console.ReadKey(true).Key != ConsoleKey.Enter) { Console.WriteLine("Please only press Enter."); }
 
-                money -= lineCount;
+                remainingMoney -= linesToPlay;
 
                 // Generate slot values
                 for (int indexRow = 0; indexRow < ROWS; indexRow++)
@@ -81,7 +81,7 @@ namespace Slot_Machine
                 // Check the selected lines for matches and calculate winnings
                 if (lineType == 'H')
                 {
-                    for (int indexRow = 0; indexRow < lineCount; indexRow++)
+                    for (int indexRow = 0; indexRow < linesToPlay; indexRow++)
                     {
                         bool allEqual = true;
                         for (int indexCol = 0; indexCol < COLUMNS - 1; indexCol++)
@@ -94,14 +94,14 @@ namespace Slot_Machine
                         }
                         if (allEqual)
                         {
-                            winnings += lineCount;
+                            winnings += linesToPlay;
                         }
                     }
                 }
 
                 if (lineType == 'V')
                 {
-                    for (int indexCol = 0; indexCol < lineCount; indexCol++)
+                    for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
                     {
                         bool allEqual = true;
                         for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
@@ -114,13 +114,13 @@ namespace Slot_Machine
                         }
                         if (allEqual)
                         {
-                            winnings += lineCount;
+                            winnings += linesToPlay;
                         }
                     }
                 }
                 else 
                 {
-                    if (lineCount >= 2)
+                    if (linesToPlay >= 2)
                     {
                         // Check both diagonals for a match
                         bool firstDiagonalEqual = true;
@@ -138,14 +138,14 @@ namespace Slot_Machine
                         }
                         if (firstDiagonalEqual || secondDiagonalEqual)
                         {
-                            winnings += lineCount;
+                            winnings += linesToPlay;
                         }
                     }
                 }
 
                 if(lineType == 'D')
                 {
-                    if (lineCount == 1)
+                    if (linesToPlay == 1)
                     {
                         bool firstDigonalEqual = true;
                         for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
@@ -158,7 +158,7 @@ namespace Slot_Machine
                         }
                         if (firstDigonalEqual)
                         {
-                            winnings += lineCount;
+                            winnings += linesToPlay;
                         }
                     }
 
@@ -175,23 +175,23 @@ namespace Slot_Machine
                         }
                         if (secondDigonalEqual)
                         {
-                            winnings += lineCount;
+                            winnings += linesToPlay;
                         }
                     }
                 }
 
-                money += winnings;
+                remainingMoney += winnings;
 
                 // Display the selected lines and the winnings
-                DisplaySelectedLines(slots, lineType, lineCount);
-                Console.WriteLine($"You have won ${winnings}. Current Balance: ${money}");
+                DisplaySelectedLines(slots, lineType, linesToPlay);
+                Console.WriteLine($"You have won ${winnings}. Current Balance: ${remainingMoney}");
 
-                if (money == 0)
+                if (remainingMoney == 0)
                 {
                     Console.WriteLine("You Lose! Would you like to insert more money or press any key to exit?");
                     if (int.TryParse(Console.ReadLine(), out int additionalMoney))
                     {
-                        money += additionalMoney;
+                        remainingMoney += additionalMoney;
                     }
                 }
                 Thread.Sleep(500);
@@ -199,14 +199,14 @@ namespace Slot_Machine
         }
 
         // Helper method to display the selected lines
-        static void DisplaySelectedLines(int[,] slots, char lineType, int lineCount)
+        static void DisplaySelectedLines(int[,] slots, char lineType, int linesToPlay)
         {
             int rows = slots.GetLength(0);
             int columns = slots.GetLength(1);
 
             if (lineType == 'H')
             {
-                for (int indexRow = 0; indexRow < lineCount; indexRow++)
+                for (int indexRow = 0; indexRow < linesToPlay; indexRow++)
                 {
                     for (int indexCol = 0; indexCol < columns; indexCol++)
                     {
@@ -220,7 +220,7 @@ namespace Slot_Machine
             {
                 for (int indexRow = 0; indexRow < rows; indexRow++)
                 {
-                    for (int indexCol = 0; indexCol < lineCount; indexCol++)
+                    for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
                     {
                         Console.Write(slots[indexRow, indexCol] + " ");
                     }
@@ -234,11 +234,11 @@ namespace Slot_Machine
                 {
                     for (int indexCol = 0; indexCol < columns; indexCol++)
                     {
-                       if(indexRow == indexCol && (lineCount == 1 || lineCount == 2))
+                       if(indexRow == indexCol && (linesToPlay == 1 || linesToPlay == 2))
                         {
                             Console.Write(slots[indexRow, indexCol] + " ");
                         }
-                       else if (indexRow + indexCol == rows - 1 && lineCount == 2)
+                       else if (indexRow + indexCol == rows - 1 && linesToPlay == 2)
                         {
                             Console.Write(slots[indexRow, indexCol] + " ");
                         }
