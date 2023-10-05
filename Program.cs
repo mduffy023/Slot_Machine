@@ -97,7 +97,8 @@ namespace Slot_Machine
                         }
                     }
                 }
-                else if (lineType == 'V')
+
+                if (lineType == 'V')
                 {
                     for (int indexCol = 0; indexCol < lineCount; indexCol++)
                     {
@@ -141,6 +142,11 @@ namespace Slot_Machine
                     }
                 }
 
+                if(lineType == 'D')
+                {
+                    if (lineCount >= 1)
+                        Parallel{ }
+                }
                 money += winnings;
 
                 // Display the selected lines and the winnings
@@ -176,7 +182,8 @@ namespace Slot_Machine
                     Console.WriteLine();
                 }
             }
-            else if (lineType == 'V')
+
+            if (lineType == 'V')
             {
                 for (int indexRow = 0; indexRow < rows; indexRow++)
                 {
@@ -187,24 +194,7 @@ namespace Slot_Machine
                     Console.WriteLine();
                 }
             }
-            //else // Diagonal
-            //{
-            //    for (int i = 0; i < rows; i++)
-            //    {
-            //        for (int j = 0; j < columns; j++)
-            //        {
-            //            if (i == j || i + j == columns - 1)
-            //            {
-            //                Console.Write(slots[i, j] + " ");
-            //            }
-            //            else
-            //            {
-            //                Console.Write("  ");
-            //            }
-            //        }
-            Console.WriteLine();
-                }
-            }
+           Console.WriteLine();
         }
-//    }
-//}
+    }
+}
