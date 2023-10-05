@@ -77,6 +77,7 @@ namespace Slot_Machine
 
                 int winnings = 0;
 
+                //fixed the if else to if
                 // Check the selected lines for matches and calculate winnings
                 if (lineType == 'H')
                 {
@@ -144,9 +145,41 @@ namespace Slot_Machine
 
                 if(lineType == 'D')
                 {
-                    if (lineCount >= 1)
-                        Parallel{ }
+                    if (lineCount == 1)
+                    {
+                        bool firstDigonalEqual = true;
+                        for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                        {
+                            if (slots[indexRow, indexRow] != slots[indexRow + 1, indexRow + 1])
+                            {
+                                firstDigonalEqual = false;
+                                break;
+                            }
+                        }
+                        if (firstDigonalEqual)
+                        {
+                            winnings += lineCount;
+                        }
+                    }
+
+                    if( lineType == 2)
+                    {
+                        bool secondDigonalEqual = true;
+                        for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                        {
+                            if (slots[indexRow, COLUMNS - 1 - indexRow] != slots[indexRow + 1, COLUMNS -2 - indexRow])
+                            {
+                                secondDigonalEqual = false;
+                                break;
+                            }
+                        }
+                        if (secondDigonalEqual)
+                        {
+                            winnings += lineCount;
+                        }
+                    }
                 }
+
                 money += winnings;
 
                 // Display the selected lines and the winnings
@@ -194,7 +227,29 @@ namespace Slot_Machine
                     Console.WriteLine();
                 }
             }
-           Console.WriteLine();
+
+            if (lineType == 'D')
+            {
+                for (int indexRow = 0; indexRow < rows; indexRow++)
+                {
+                    for (int indexCol = 0; indexCol < columns; indexCol++)
+                    {
+                       if(indexRow == indexCol && (lineCount == 1 || lineCount == 2))
+                        {
+                            Console.Write(slots[indexRow, indexCol] + " ");
+                        }
+                       else if (indexRow + indexCol == rows - 1 && lineCount == 2)
+                        {
+                            Console.Write(slots[indexRow, indexCol] + " ");
+                        }
+                       else
+                        {
+                            Console.Write("- ");
+                        }
+                    }              
+                }
+            }
+          Console.WriteLine();
         }
     }
 }
