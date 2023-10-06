@@ -8,6 +8,8 @@ namespace Slot_Machine
         public const char LINE_TYPE_HORIZONTAL = 'H';
         public const char LINE_TYPE_VERTICAL = 'V';
         public const char LINE_TYPE_DIAGONAL = 'D';
+        public const int MIN_LINE_AMOUNT = 1;
+        public const int MIN_LINE_AMOUNT_DIAGONAL_PLAY = 2;
         public const int ROWS = 3;
         public const int COLUMNS = 3;
 
@@ -42,7 +44,7 @@ namespace Slot_Machine
                         Console.WriteLine("Invalid input. Please enter H, V, or D.");
                 }
 
-                int minLinesToPlay = lineType == LINE_TYPE_DIAGONAL ? 2 : 1;
+                int minLinesToPlay = lineType == LINE_TYPE_DIAGONAL ? MIN_LINE_AMOUNT_DIAGONAL_PLAY : MIN_LINE_AMOUNT;
                 int maxLinesToPlay = Math.Min(ROWS, COLUMNS);
                 Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
 
@@ -53,13 +55,13 @@ namespace Slot_Machine
                     {
                         linesToPlay = Convert.ToInt32(Console.ReadLine());
                   
-                        if (linesToPlay >= 1 && linesToPlay <= Math.Min(ROWS, COLUMNS) && linesToPlay <= remainingMoney)
+                        if (linesToPlay >= 1 && linesToPlay <= maxLinesToPlay && linesToPlay <= remainingMoney)
                         {
                             break;
                         }
                         else
                         {
-                            Console.WriteLine($"Invalid input. Please enter a number 1 to {Math.Min(ROWS, COLUMNS)}, and ensure you have enough balance.");
+                            Console.WriteLine($"Invalid input. Please enter a number 1 to {maxLinesToPlay}, and ensure you have enough balance.");
                         }
                     }
                     catch 
