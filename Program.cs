@@ -5,11 +5,15 @@ namespace Slot_Machine
 {
     internal class Program
     {
+        public const char LINE_TYPE_HORIZONTAL = 'H';
+        public const char LINE_TYPE_VERTICAL = 'V';
+        public const char LINE_TYPE_DIAGONAL = 'D';
+        public const int ROWS = 3;
+        public const int COLUMNS = 3;
+
         static void Main(string[] args)
         {
-            const int ROWS = 3;
-            const int COLUMNS = 3;
-
+            
             Console.WriteLine("Slot Machine Game");
             Console.WriteLine("Game Rules:");
             Console.WriteLine("1. The cost is $1 for 1 line, $2 for 2 lines, and $3 for 3 lines.");
@@ -32,7 +36,7 @@ namespace Slot_Machine
                 {
                     Console.WriteLine("Choose the line type you would like to play: H for Horizontal, V for Vertical, and D for Diagonal");
                     lineType = char.ToUpper(Console.ReadKey(true).KeyChar);
-                    if (lineType == 'H' || lineType == 'V' || (lineType == 'D' && ROWS >= 2))
+                    if (lineType == LINE_TYPE_HORIZONTAL || lineType == LINE_TYPE_VERTICAL || (lineType == LINE_TYPE_DIAGONAL && ROWS >= 2))
                         break;
                     else
                         Console.WriteLine("Invalid input. Please enter H, V, or D.");
