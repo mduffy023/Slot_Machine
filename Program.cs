@@ -183,7 +183,7 @@ namespace Slot_Machine
                 remainingMoney += winnings;
 
                 // Display the selected lines and the winnings
-                DisplaySelectedLines(slots, lineType, linesToPlay);
+                DisplayEntireGrid(slots);
                 Console.WriteLine($"You have won ${winnings}. Current Balance: ${remainingMoney}");
 
                 if (remainingMoney == 0)
@@ -198,58 +198,19 @@ namespace Slot_Machine
             }
         }
 
-        // Helper method to display the selected lines
-        static void DisplaySelectedLines(int[,] slots, char lineType, int linesToPlay)
+        static void DisplayEntireGrid(int[,] slots)
         {
             int rows = slots.GetLength(0);
             int columns = slots.GetLength(1);
 
-            if (lineType == 'H')
+            for (int indexRow = 0; indexRow < rows; indexRow++)
             {
-                for (int indexRow = 0; indexRow < linesToPlay; indexRow++)
+                for (int indexCol = 0; indexCol < columns; indexCol++)
                 {
-                    for (int indexCol = 0; indexCol < columns; indexCol++)
-                    {
-                        Console.Write(slots[indexRow, indexCol] + " ");
-                    }
-                    Console.WriteLine();
+                    Console.Write(slots[indexRow, indexCol] + " ");
                 }
+                Console.WriteLine();
             }
-
-            if (lineType == 'V')
-            {
-                for (int indexRow = 0; indexRow < rows; indexRow++)
-                {
-                    for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
-                    {
-                        Console.Write(slots[indexRow, indexCol] + " ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-
-            if (lineType == 'D')
-            {
-                for (int indexRow = 0; indexRow < rows; indexRow++)
-                {
-                    for (int indexCol = 0; indexCol < columns; indexCol++)
-                    {
-                       if(indexRow == indexCol && (linesToPlay == 1 || linesToPlay == 2))
-                        {
-                            Console.Write(slots[indexRow, indexCol] + " ");
-                        }
-                       else if (indexRow + indexCol == rows - 1 && linesToPlay == 2)
-                        {
-                            Console.Write(slots[indexRow, indexCol] + " ");
-                        }
-                       else
-                        {
-                            Console.Write("- ");
-                        }
-                    }              
-                }
-            }
-          Console.WriteLine();
         }
     }
 }
