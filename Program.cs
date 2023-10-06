@@ -42,7 +42,10 @@ namespace Slot_Machine
                         Console.WriteLine("Invalid input. Please enter H, V, or D.");
                 }
 
-                Console.WriteLine($"Choose the number of lines you would like to play (1 to {Math.Min(ROWS, COLUMNS)}) ");
+                int minLinesToPlay = lineType == LINE_TYPE_DIAGONAL ? 2 : 1;
+                int maxLinesToPlay = Math.Min(ROWS, COLUMNS);
+                Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
+
                 int linesToPlay;
                 while (true)
                 {
@@ -83,7 +86,7 @@ namespace Slot_Machine
 
                 //fixed the if else to if
                 // Check the selected lines for matches and calculate winnings
-                if (lineType == 'H')
+                if (lineType == LINE_TYPE_HORIZONTAL)
                 {
                     for (int indexRow = 0; indexRow < linesToPlay; indexRow++)
                     {
@@ -103,7 +106,7 @@ namespace Slot_Machine
                     }
                 }
 
-                if (lineType == 'V')
+                if (lineType == LINE_TYPE_VERTICAL)
                 {
                     for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
                     {
@@ -147,7 +150,7 @@ namespace Slot_Machine
                     }
                 }
 
-                if(lineType == 'D')
+                if(lineType == LINE_TYPE_DIAGONAL)
                 {
                     if (linesToPlay == 1)
                     {
