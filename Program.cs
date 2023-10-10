@@ -153,7 +153,7 @@ namespace Slot_Machine
 
                 if(lineType == LINE_TYPE_DIAGONAL)
                 {
-                    if (linesToPlay == 1)
+                    if (linesToPlay >= 1)
                     {
                         bool firstDigonalEqual = true;
                         for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
@@ -170,7 +170,7 @@ namespace Slot_Machine
                         }
                     }
 
-                    if( lineType == 2)
+                    if( lineType >= 2)
                     {
                         bool secondDigonalEqual = true;
                         for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
