@@ -41,9 +41,14 @@ namespace Slot_Machine
                     Console.WriteLine("Choose the line type you would like to play: H for Horizontal, V for Vertical, and D for Diagonal");
                     lineType = char.ToUpper(Console.ReadKey(true).KeyChar);
                     if (lineType == LINE_TYPE_HORIZONTAL || lineType == LINE_TYPE_VERTICAL || (lineType == LINE_TYPE_DIAGONAL && ROWS >= 2))
+                    {
                         break;
+                    }
+
                     else
+                    {
                         Console.WriteLine("Invalid input. Please enter H, V, or D.");
+                    }
                 }
 
                 int minLinesToPlay = lineType == LINE_TYPE_DIAGONAL ? MIN_LINE_AMOUNT_DIAGONAL_PLAY : MIN_LINE_AMOUNT;
