@@ -46,15 +46,29 @@ namespace Slot_Machine
 
                 int minLinesToPlay = lineType == LINE_TYPE_DIAGONAL ? MIN_LINE_AMOUNT_DIAGONAL_PLAY : MIN_LINE_AMOUNT;
                 int maxLinesToPlay = Math.Min(ROWS, COLUMNS);
-                Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
+                if(lineType == LINE_TYPE_DIAGONAL)
+                {
+                   Console.WriteLine($"Choose the number of diagonal lines you would like to play (1 for left diagonal, 2 for both): ");
+                }
+                
+                else 
+                {
+                    Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
+                }
 
                 int linesToPlay;
                 while (true)
                 {
-                    try
+                
                     {
-                        linesToPlay = Convert.ToInt32(Console.ReadLine());
-                  
+                        bool isValidInput = int.TryParse(Console.ReadLine(), out linesToPlay);
+
+                        if (!isValidInput)
+                        {
+                            Console.WriteLine("Please enter a valid integer.");
+                            continue;
+                        }
+
                         if (linesToPlay >= 1 && linesToPlay <= maxLinesToPlay && linesToPlay <= remainingMoney)
                         {
                             break;
@@ -63,11 +77,7 @@ namespace Slot_Machine
                         {
                             Console.WriteLine($"Invalid input. Please enter a number 1 to {maxLinesToPlay}, and ensure you have enough balance.");
                         }
-                    }
-                    catch 
-                    {
-                        Console.WriteLine("Please enter a valid intger.");
-                    }
+                    }      
                 }
 
                 Console.WriteLine("Press Enter to start spin");
@@ -170,7 +180,7 @@ namespace Slot_Machine
                         }
                     }
 
-                    if( lineType >= 2)
+                    if( lineType == 2)
                     {
                         bool secondDigonalEqual = true;
                         for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
