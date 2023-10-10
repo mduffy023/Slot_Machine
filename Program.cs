@@ -86,7 +86,6 @@ namespace Slot_Machine
 
                 int winnings = 0;
 
-                //fixed the if else to if
                 // Check the selected lines for matches and calculate winnings
                 if (lineType == LINE_TYPE_HORIZONTAL)
                 {
@@ -191,8 +190,18 @@ namespace Slot_Machine
 
                 remainingMoney += winnings;
 
-                // Display the selected lines and the winnings
-                DisplayEntireGrid(slots);
+                int rows = slots.GetLength(0);
+                int columns = slots.GetLength(1);
+
+                for (int indexRow = 0; indexRow < rows; indexRow++)
+                {
+                    for (int indexCol = 0; indexCol < columns; indexCol++)
+                    {
+                        Console.Write(slots[indexRow, indexCol] + " ");
+                    }
+                    Console.WriteLine();
+                }
+
                 Console.WriteLine($"You have won ${winnings}. Current Balance: ${remainingMoney}");
 
                 if (remainingMoney == 0)
@@ -204,21 +213,6 @@ namespace Slot_Machine
                     }
                 }
                 Thread.Sleep(500);
-            }
-        }
-
-        static void DisplayEntireGrid(int[,] slots)
-        {
-            int rows = slots.GetLength(0);
-            int columns = slots.GetLength(1);
-
-            for (int indexRow = 0; indexRow < rows; indexRow++)
-            {
-                for (int indexCol = 0; indexCol < columns; indexCol++)
-                {
-                    Console.Write(slots[indexRow, indexCol] + " ");
-                }
-                Console.WriteLine();
             }
         }
     }
