@@ -126,30 +126,30 @@ namespace Slot_Machine
                         }
                     }
                 }
-                else 
+               
+                if (linesToPlay >= 2)
                 {
-                    if (linesToPlay >= 2)
+                 // Check both diagonals for a match
+                 bool firstDiagonalEqual = true;
+                 bool secondDiagonalEqual = true;
+                for (int i = 0; i < ROWS - 1; i++)
+                {
+                    if (slots[i, i] != slots[i + 1, i + 1])
                     {
-                        // Check both diagonals for a match
-                        bool firstDiagonalEqual = true;
-                        bool secondDiagonalEqual = true;
-                        for (int i = 0; i < ROWS - 1; i++)
-                        {
-                            if (slots[i, i] != slots[i + 1, i + 1])
-                            {
-                                firstDiagonalEqual = false;
-                            }
-                            if (slots[i, COLUMNS - 1 - i] != slots[i + 1, COLUMNS - 2 - i])
-                            {
-                                secondDiagonalEqual = false;
-                            }
-                        }
-                        if (firstDiagonalEqual || secondDiagonalEqual)
-                        {
-                            winnings += linesToPlay;
-                        }
+                     firstDiagonalEqual = false;
                     }
+
+                   if (slots[i, COLUMNS - 1 - i] != slots[i + 1, COLUMNS - 2 - i])
+                   {
+                    secondDiagonalEqual = false;
+                   }
                 }
+                   if (firstDiagonalEqual || secondDiagonalEqual)
+                   {
+                     winnings += linesToPlay;
+                   }
+                }
+                
 
                 if(lineType == LINE_TYPE_DIAGONAL)
                 {
