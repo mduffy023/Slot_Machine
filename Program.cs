@@ -8,6 +8,8 @@ namespace Slot_Machine
         public const char LINE_TYPE_HORIZONTAL = 'H';
         public const char LINE_TYPE_VERTICAL = 'V';
         public const char LINE_TYPE_DIAGONAL = 'D';
+        public const int SLOT_MIN_VALUE = 1;
+        public const int SLOT_MAX_VALUE = 4;
         public const int MIN_LINE_AMOUNT = 1;
         public const int MIN_LINE_AMOUNT_DIAGONAL_PLAY = 2;
         public const int ROWS = 3;
@@ -90,7 +92,7 @@ namespace Slot_Machine
                 {
                     for (int indexCol = 0; indexCol < COLUMNS; indexCol++)
                     {
-                        slots[indexRow, indexCol] = rand.Next(1, 4);
+                        slots[indexRow, indexCol] = rand.Next(SLOT_MIN_VALUE, SLOT_MAX_VALUE);
                     }
                 }
 
@@ -180,7 +182,7 @@ namespace Slot_Machine
                         }
                     }
 
-                    if( lineType == 2)
+                    if(linesToPlay == 2)
                     {
                         bool secondDigonalEqual = true;
                         for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
