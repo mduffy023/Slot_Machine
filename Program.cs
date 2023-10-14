@@ -24,6 +24,9 @@ namespace Slot_Machine
             PlayGame(remainingMoney);
         }
 
+        /// <summary>
+        /// Displays for the rules and introduction  
+        /// </summary>
         private static void DisplayIntro()
         {
             Console.WriteLine("Slot Machine Game");
@@ -34,6 +37,15 @@ namespace Slot_Machine
             Console.WriteLine("4. Press Enter to spin.");
         }
 
+        /// <summary>
+        /// This method prompts the player to specify a monetary amount by displaying a message on the console.
+        /// It then reads the player's input from the console, attempts to convert this input to an integer,
+        /// and returns the resulting integer value. If the conversion is successful, this integer value
+        /// represents the amount of money the player has inserted.
+        /// </summary>
+        /// <returns>
+        /// The amount of money inserted by the player, as an integer.
+        /// </returns>
         private static int GetInitialMoney()
         {
             Console.WriteLine("How much money would you like to insert? ");
@@ -41,6 +53,10 @@ namespace Slot_Machine
             return remainingMoney;
         }
 
+        /// <summary>
+        /// main game loops which continues  as long as the player has money 
+        /// </summary>
+        /// <param name="remainingMoney">Equals the money left for the player</param>
         private static void PlayGame(int remainingMoney)
         {
             int[,] slots = new int[ROWS, COLUMNS];
@@ -69,6 +85,16 @@ namespace Slot_Machine
                 Thread.Sleep(500);
             }
         }
+
+        /// <summary>
+        /// Prompts the user to choose a line type for gameplay by entering a character: 'H' for Horizontal, 
+        /// 'V' for Vertical, or 'D' for Diagonal. The method ensures valid input is received, and continues 
+        /// to prompt the user in case of invalid input. Note: Diagonal is only considered a valid choice if 
+        /// the number of rows is two or more.
+        /// </summary>
+        /// <returns>
+        /// A character representing the chosen line type: 'H', 'V', or 'D'.
+        /// </returns>
         private static char GetLineType()
         {
             char lineType;
@@ -89,6 +115,17 @@ namespace Slot_Machine
             return lineType;
         }
 
+        /// <summary>
+        /// Determines the number of lines a player wishes to play in a game based on the type of line (diagonal or other) 
+        /// and the amount of money remaining. The method prompts the user to input their choice and validates this input 
+        /// to ensure it's a valid integer within the allowed range and does not exceed the player's remaining money.
+        /// </summary>
+        /// <param name="lineType">The type of line the player wishes to play. 
+        /// Character value representing either diagonal lines or other types of lines.</param>
+        /// <param name="remainingMoney">The amount of money the player has remaining. 
+        /// Used to validate the player's choice does not exceed their balance.</param>
+        /// <returns>The number of lines the player wishes to play. 
+        /// Validated to be a positive integer within the allowed range and not exceeding the player's remaining money.</returns>
         private static int GetLinesToPlay(char lineType, int remainingMoney)
         {
             int minLinesToPlay = lineType == LINE_TYPE_DIAGONAL ? MIN_LINE_AMOUNT_DIAGONAL_PLAY : MIN_LINE_AMOUNT;
@@ -122,16 +159,23 @@ namespace Slot_Machine
                     Console.WriteLine($"Invalid input. Please enter a number 1 to {maxLinesToPlay}, and ensure you have enough balance.");
                 }
             }
-
             return linesToPlay;
         }
 
+        /// <summary>
+        /// waits for the user to initiate a spain by pressing the Enter key
+        /// </summary>
         private static void WaitForSpin()
         {
             Console.WriteLine("Press Enter to start spin");
             while (Console.ReadKey(true).Key != ConsoleKey.Enter) { Console.WriteLine("Please only press Enter."); }
         }
 
+        /// <summary>
+        ///  Fills the slots with random vaules 
+        /// </summary>
+        /// <param name="slots">2D array filled with random vaules</param>
+        /// <param name="rand">Random object that generates the random values</param>
         private static void FillSlots(int[,] slots, Random rand)
         {
             for (int indexRow = 0; indexRow < ROWS; indexRow++)
@@ -143,6 +187,13 @@ namespace Slot_Machine
             }
         }
 
+        /// <summary>
+        /// Calculates the winnings based on matching elements in a slot machine grid.
+        /// </summary>
+        /// <param name="slots">2D array filled with random vaules.</param>
+        /// <param name="lineType">The type of line (horizontal, vertical, or diagonal) to check for matching elements.</param>
+        /// <param name="linesToPlay">The number of lines to play in the slot machine.</param>
+        /// <returns>The total winnings based on the number of matching lines found.</returns>
         private static int CalculateWinnings(int[,] slots, char lineType, int linesToPlay)
         {
             int winnings = 0;
@@ -165,8 +216,7 @@ namespace Slot_Machine
                         winnings += linesToPlay;
                     }
                 }
-            }
-
+            }         
             if (lineType == LINE_TYPE_VERTICAL)
             {
                 for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
@@ -186,7 +236,6 @@ namespace Slot_Machine
                     }
                 }
             }
-
             if (linesToPlay >= 2)
             {
                 bool firstDiagonalEqual = true;
@@ -208,8 +257,6 @@ namespace Slot_Machine
                     winnings += linesToPlay;
                 }
             }
-
-
             if (lineType == LINE_TYPE_DIAGONAL)
             {
                 if (linesToPlay >= 1)
@@ -228,7 +275,6 @@ namespace Slot_Machine
                         winnings += linesToPlay;
                     }
                 }
-
                 if (linesToPlay == 2)
                 {
                     bool secondDigonalEqual = true;
@@ -246,10 +292,13 @@ namespace Slot_Machine
                     }
                 }
             }
-
            return winnings;
         }
 
+        /// <summary>
+        /// display the contents of a 2D array to the console 
+        /// </summary>
+        /// <param name="slots">The 2D array to be displayed</param>
         private static void DisplaySlots(int[,] slots)
         {
             int rows = slots.GetLength(0);
@@ -266,30 +315,3 @@ namespace Slot_Machine
         }
     }
 }
-
-
-
-
-
-
-
-    
-    
-
-//
-
-//      
-
-
-
-
-//            remainingMoney -= linesToPlay;
-
-//            // Generate slot values
-//        
-
-//   
-
-
-//           
-//}
