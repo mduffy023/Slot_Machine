@@ -188,112 +188,135 @@ namespace Slot_Machine
         }
 
         /// <summary>
-        /// Calculates the winnings based on matching elements in a slot machine grid.
+        /// Calculates the winnings based on the line type and number of lines played.
         /// </summary>
-        /// <param name="slots">2D array filled with random vaules.</param>
-        /// <param name="lineType">The type of line (horizontal, vertical, or diagonal) to check for matching elements.</param>
-        /// <param name="linesToPlay">The number of lines to play in the slot machine.</param>
-        /// <returns>The total winnings based on the number of matching lines found.</returns>
+        /// <param name="slots">The 2D array representing the slot machine grid.</param>
+        /// <param name="lineType">The type of line (horizontal, vertical, or diagonal) to check for winning combinations.</param>
+        /// <param name="linesToPlay">The number of lines the player has chosen to play.</param>
+        /// <returns>The total winnings based on matching elements along the specified line
         private static int CalculateWinnings(int[,] slots, char lineType, int linesToPlay)
         {
             int winnings = 0;
 
-            if (lineType == LINE_TYPE_HORIZONTAL)
+            if(lineType == LINE_TYPE_HORIZONTAL) 
             {
-                for (int indexRow = 0; indexRow < linesToPlay; indexRow++)
-                {
-                    bool allEqual = true;
-                    for (int indexCol = 0; indexCol < COLUMNS - 1; indexCol++)
-                    {
-                        if (slots[indexRow, indexCol] != slots[indexRow, indexCol + 1])
-                        {
-                            allEqual = false;
-                            break;
-                        }
-                    }
-                    if (allEqual)
-                    {
-                        winnings += linesToPlay;
-                    }
-                }
-            }         
+                winnings = CheckHorizontal(slots,linesToPlay);
+            }
             if (lineType == LINE_TYPE_VERTICAL)
             {
-                for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
-                {
-                    bool allEqual = true;
-                    for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
-                    {
-                        if (slots[indexRow, indexCol] != slots[indexRow + 1, indexCol])
-                        {
-                            allEqual = false;
-                            break;
-                        }
-                    }
-                    if (allEqual)
-                    {
-                        winnings += linesToPlay;
-                    }
-                }
-            }
-            if (linesToPlay >= 2)
-            {
-                bool firstDiagonalEqual = true;
-                bool secondDiagonalEqual = true;
-                for (int i = 0; i < ROWS - 1; i++)
-                {
-                    if (slots[i, i] != slots[i + 1, i + 1])
-                    {
-                        firstDiagonalEqual = false;
-                    }
-
-                    if (slots[i, COLUMNS - 1 - i] != slots[i + 1, COLUMNS - 2 - i])
-                    {
-                        secondDiagonalEqual = false;
-                    }
-                }
-                if (firstDiagonalEqual || secondDiagonalEqual)
-                {
-                    winnings += linesToPlay;
-                }
+                winnings += CheckVertical(slots, linesToPlay);
             }
             if (lineType == LINE_TYPE_DIAGONAL)
             {
-                if (linesToPlay >= 1)
+                winnings += CheckDiagonal(slots, linesToPlay);
+            }
+
+            return winnings;
+        }
+
+        /// <summary>
+        /// Checks horizontal lines for winning combinations in the slot machine grid.
+        /// </summary>
+        /// <param name="slots">The 2D array representing the slot machine grid.</param>
+        /// <param name="linesToPlay">The number of lines the player has chosen to play.</param>
+        /// <returns>The total winnings from horizontal lines based on matching elements and the number of lines played.</returns>
+        private static int CheckHorizontal(int[,] slots, int linesToPlay)
+        {
+            int winAmount = 0;
+            for (int indexRow = 0; indexRow < linesToPlay; indexRow++)
+            {
+                bool allEqual = true;
+                for (int indexCol = 0; indexCol < COLUMNS - 1; indexCol++)
                 {
-                    bool firstDigonalEqual = true;
-                    for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                    if (slots[indexRow, indexCol] != slots[indexRow, indexCol + 1])
                     {
-                        if (slots[indexRow, indexRow] != slots[indexRow + 1, indexRow + 1])
-                        {
-                            firstDigonalEqual = false;
-                            break;
-                        }
-                    }
-                    if (firstDigonalEqual)
-                    {
-                        winnings += linesToPlay;
+                        allEqual = false;
+                        break;
                     }
                 }
-                if (linesToPlay == 2)
+                if (allEqual)
                 {
-                    bool secondDigonalEqual = true;
-                    for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
-                    {
-                        if (slots[indexRow, COLUMNS - 1 - indexRow] != slots[indexRow + 1, COLUMNS - 2 - indexRow])
-                        {
-                            secondDigonalEqual = false;
-                            break;
-                        }
-                    }
-                    if (secondDigonalEqual)
-                    {
-                        winnings += linesToPlay;
-                    }
+                    winAmount += linesToPlay;
                 }
             }
-           return winnings;
+            return winAmount;
         }
+
+        /// <summary>
+        /// Checks vertical lines for winning combinations in the slot machine grid.
+        /// </summary>
+        /// <param name="slots">The 2D array representing the slot machine grid.</param>
+        /// <param name="linesToPlay">The number of lines the player has chosen to play.</param>
+        /// <returns>The total winnings from vertical lines based on matching elements and the number of lines played.</returns>
+        private static int CheckVertical(int[,] slots, int linesToPlay)
+        {
+            int winAmount = 0;
+            for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
+            {
+                bool allEqual = true;
+                for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                {
+                    if (slots[indexRow, indexCol] != slots[indexRow + 1, indexCol])
+                    {
+                        allEqual = false;
+                        break;
+                    }
+                }
+                if (allEqual)
+                {
+                    winAmount += linesToPlay;
+                }
+            }
+            return winAmount;
+        }
+
+        /// <summary>
+        /// Checks diagonal lines for winning combinations in the slot machine grid.
+        /// </summary>
+        /// <param name="slots">The 2D array representing the slot machine grid.</param>
+        /// <param name="linesToPlay">The number of lines the player has chosen to play.</param>
+        /// <returns>The total winnings from diagonal lines based on matching elements and the number of lines played.</returns>
+        private static int CheckDiagonal(int[,] slots, int linesToPlay)
+        {
+            int winAmount = 0;
+
+            if (linesToPlay >= 1)
+            {
+                bool firstDiagonalEqual = true;
+                for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                {
+                    if (slots[indexRow, indexRow] != slots[indexRow + 1, indexRow + 1])
+                    {
+                        firstDiagonalEqual = false;
+                        break;
+                    }
+                }
+                if (firstDiagonalEqual)
+                {
+                    winAmount += linesToPlay;
+                }
+            }
+
+            if (linesToPlay == 2)
+            {
+                bool secondDiagonalEqual = true;
+                for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                {
+                    if (slots[indexRow, COLUMNS - 1 - indexRow] != slots[indexRow + 1, COLUMNS - 2 - indexRow])
+                    {
+                        secondDiagonalEqual = false;
+                        break;
+                    }
+                }
+                if (secondDiagonalEqual)
+                {
+                    winAmount += linesToPlay;
+                }
+            }
+
+            return winAmount;
+        }
+
 
         /// <summary>
         /// display the contents of a 2D array to the console 
@@ -315,3 +338,5 @@ namespace Slot_Machine
         }
     }
 }
+
+
