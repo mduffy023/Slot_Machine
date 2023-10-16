@@ -10,12 +10,14 @@ namespace Slot_Machine
         public const char LINE_TYPE_HORIZONTAL = 'H';
         public const char LINE_TYPE_VERTICAL = 'V';
         public const char LINE_TYPE_DIAGONAL = 'D';
-        public const int SLOT_MIN_VALUE = 1;
-        public const int SLOT_MAX_VALUE = 4;
+        public const int SLOT_MIN_VALUE = 0;
+        public const int SLOT_MAX_VALUE = 3;
         public const int MIN_LINE_AMOUNT = 1;
         public const int MIN_LINE_AMOUNT_DIAGONAL_PLAY = 2;
         public const int ROWS = 3;
         public const int COLUMNS = 3;
+
+        public static readonly Random rand = new Random();
 
         static void Main(string[] args)
         {
@@ -69,7 +71,7 @@ namespace Slot_Machine
                 int linesToPlay = GetLinesToPlay(lineType, remainingMoney);
                 WaitForSpin();
                 remainingMoney -= linesToPlay;
-                FillSlots(slots, rand);
+                slots =  FillSlots();
                 int winnings = CalculateWinnings(slots, lineType, linesToPlay);
                 DisplaySlots(slots);
                 remainingMoney += winnings;
@@ -176,15 +178,17 @@ namespace Slot_Machine
         /// </summary>
         /// <param name="slots">2D array filled with random vaules</param>
         /// <param name="rand">Random object that generates the random values</param>
-        private static void FillSlots(int[,] slots, Random rand)
+        private static int[,] FillSlots()  // Updated method signature
         {
+            int[,] slots = new int[ROWS, COLUMNS];
             for (int indexRow = 0; indexRow < ROWS; indexRow++)
             {
                 for (int indexCol = 0; indexCol < COLUMNS; indexCol++)
                 {
-                    slots[indexRow, indexCol] = rand.Next(SLOT_MIN_VALUE, SLOT_MAX_VALUE);
+                    slots[indexRow, indexCol] = rand.Next(SLOT_MIN_VALUE, SLOT_MAX_VALUE + 1);  // Use global Random object
                 }
             }
+            return slots;  // Return the newly created and filled array
         }
 
         /// <summary>
