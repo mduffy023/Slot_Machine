@@ -7,7 +7,7 @@ namespace Slot_Machine
         /// <summary>
         /// Displays for the rules and introduction  
         /// </summary>
-        public void DisplayIntro()
+        public static void DisplayIntro()
         {
             Console.WriteLine("Slot Machine Game");
             Console.WriteLine("Game Rules:");
@@ -26,7 +26,7 @@ namespace Slot_Machine
         /// <returns>
         /// The amount of money inserted by the player, as an integer.
         /// </returns>
-        public int GetInitialMoney()
+        public static int GetInitialMoney()
         {
             Console.WriteLine("How much money would you like to insert? ");
             int remainingMoney = Convert.ToInt32(Console.ReadLine());
@@ -42,7 +42,7 @@ namespace Slot_Machine
         /// <returns>
         /// A character representing the chosen line type: 'H', 'V', or 'D'.
         /// </returns>
-        public char GetLineType()
+        public static char GetLineType()
         {
             char lineType;
             while (true)
@@ -72,7 +72,7 @@ namespace Slot_Machine
         /// Used to validate the player's choice does not exceed their balance.</param>
         /// <returns>The number of lines the player wishes to play. 
         /// Validated to be a positive integer within the allowed range and not exceeding the player's remaining money.</returns>
-        public int GetLinesToPlay(char lineType, int remainingMoney)
+        public static int GetLinesToPlay(char lineType, int remainingMoney)
         {
             int minLinesToPlay = lineType == LogicMethods.LINE_TYPE_DIAGONAL ? LogicMethods.MIN_LINE_AMOUNT_DIAGONAL_PLAY : LogicMethods.MIN_LINE_AMOUNT;
             int maxLinesToPlay = Math.Min(LogicMethods.ROWS, LogicMethods.COLUMNS);
@@ -111,7 +111,7 @@ namespace Slot_Machine
         /// <summary>
         /// waits for the user to initiate a spain by pressing the Enter key
         /// </summary>
-        public void WaitForSpin()
+        public static void WaitForSpin()
         {
             Console.WriteLine("Press Enter to start spin");
             while (Console.ReadKey(true).Key != ConsoleKey.Enter)
@@ -124,7 +124,7 @@ namespace Slot_Machine
         /// display the contents of a 2D array to the console 
         /// </summary>
         /// <param name="slots">The 2D array to be displayed</param>
-        public void DisplaySlots(int[,] slots)
+        public static void DisplaySlots(int[,] slots)
         {
             int rows = slots.GetLength(0);
             int columns = slots.GetLength(1);

@@ -8,11 +8,9 @@ namespace Slot_Machine
     {
         static void Main(string[] args)
         {
-            UIMethods uiMethods = new UIMethods();
-            LogicMethods logicMethods = new LogicMethods();
-            uiMethods.DisplayIntro();
-            int remainingMoney = uiMethods.GetInitialMoney();
-            PlayGame(remainingMoney, uiMethods, logicMethods);
+            UIMethods.DisplayIntro();
+            int remainingMoney = UIMethods.GetInitialMoney();
+            PlayGame(remainingMoney);
         }
 
         /// <summary>
@@ -23,7 +21,7 @@ namespace Slot_Machine
         /// <param name="remainingMoney">The amount of money the player has remaining.</param>
         /// <param name="uiMethods">An instance of the UIMethods class to handle user interactions.</param>
         /// <param name="logicMethods">An instance of the LogicMethods class to handle game logic.</param>
-        private static void PlayGame(int remainingMoney, UIMethods uiMethods, LogicMethods logicMethods)
+        private static void PlayGame(int remainingMoney)
         {
             int[,] slots = LogicMethods.FillSlots();
 
@@ -31,14 +29,14 @@ namespace Slot_Machine
             {
                 Console.WriteLine($"Balance ${remainingMoney}");
 
-                char lineType = uiMethods.GetLineType();
-                int linesToPlay = uiMethods.GetLinesToPlay(lineType, remainingMoney);
+                char lineType = UIMethods.GetLineType();
+                int linesToPlay = UIMethods.GetLinesToPlay(lineType, remainingMoney);
 
-                uiMethods.WaitForSpin();
+                UIMethods.WaitForSpin();
                 remainingMoney -= linesToPlay;
                 int winnings = LogicMethods.CalculateWinnings(slots, lineType, linesToPlay);
 
-                uiMethods.DisplaySlots(slots);
+                UIMethods.DisplaySlots(slots);
                 remainingMoney += winnings;
 
                 Console.WriteLine($"You have won ${winnings}. Current Balance: ${remainingMoney}");
