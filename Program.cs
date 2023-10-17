@@ -25,7 +25,7 @@ namespace Slot_Machine
         /// <param name="logicMethods">An instance of the LogicMethods class to handle game logic.</param>
         private static void PlayGame(int remainingMoney, UIMethods uiMethods, LogicMethods logicMethods)
         {
-            int[,] slots = new int[LogicMethods.ROWS, LogicMethods.COLUMNS];
+            int[,] slots = LogicMethods.FillSlots();
 
             while (remainingMoney > 0)
             {
