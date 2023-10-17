@@ -74,8 +74,8 @@ namespace Slot_Machine
         /// Validated to be a positive integer within the allowed range and not exceeding the player's remaining money.</returns>
         public static int GetLinesToPlay(char lineType, int remainingMoney)
         {
-            int minLinesToPlay = lineType == LogicMethods.LINE_TYPE_DIAGONAL ? LogicMethods.MIN_LINE_AMOUNT_DIAGONAL_PLAY : LogicMethods.MIN_LINE_AMOUNT;
-            int maxLinesToPlay = Math.Min(LogicMethods.ROWS, LogicMethods.COLUMNS);
+            int minLinesToPlay = LogicMethods.GetMinLinesToPlay(lineType);
+            int maxLinesToPlay = LogicMethods.GetMaxLinesToPlay(lineType);
             if (lineType == LogicMethods.LINE_TYPE_DIAGONAL)
             {
                 Console.WriteLine($"Choose the number of diagonal lines you would like to play (1 for left diagonal, 2 for both): ");

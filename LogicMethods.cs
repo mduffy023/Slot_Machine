@@ -17,6 +17,26 @@ namespace Slot_Machine
         public static readonly Random rand = new Random();
 
         /// <summary>
+        /// Gets the minimum number of lines to play based on the selected line type.
+        /// </summary>
+        /// <param name="lineType">The type of line chosen by the player (horizontal, vertical, or diagonal).</param>
+        /// <returns>The minimum number of lines to play.</returns>
+        public static int GetMinLinesToPlay(char lineType)
+        {
+          return lineType == LINE_TYPE_DIAGONAL ? MIN_LINE_AMOUNT_DIAGONAL_PLAY : MIN_LINE_AMOUNT;
+        }
+
+        // <summary>
+        /// Gets the maximum number of lines to play based on the selected line type and the dimensions of the slot machine.
+        /// </summary>
+        /// <param name="lineType">The type of line chosen by the player (horizontal, vertical, or diagonal).</param>
+        /// <returns>The maximum number of lines to play.</returns>
+        public static int GetMaxLinesToPlay(char lineType)
+        {
+            return Math.Max(ROWS, COLUMNS);
+        }
+
+        /// <summary>
         ///  Fills the slots with random vaules 
         /// </summary>
         /// <param name="slots">2D array filled with random vaules</param>
