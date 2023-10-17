@@ -47,7 +47,7 @@ namespace Slot_Machine
             char lineType;
             while (true)
             {
-                Console.WriteLine("Choose the line type you would like to play: H for Horizontal, V for Vertical, and D for Diagonal");
+                Console.WriteLine($"Choose the line type you would like to play: {LogicMethods.LINE_TYPE_HORIZONTAL} for Horizontal, {LogicMethods.LINE_TYPE_VERTICAL} for Vertical, and {LogicMethods.LINE_TYPE_DIAGONAL} for Diagonal");
                 lineType = char.ToUpper(Console.ReadKey(true).KeyChar);
                 if (lineType == LogicMethods.LINE_TYPE_HORIZONTAL || lineType == LogicMethods.LINE_TYPE_VERTICAL || (lineType == LogicMethods.LINE_TYPE_DIAGONAL && LogicMethods.ROWS >= 2))
                 {
