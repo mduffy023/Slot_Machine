@@ -30,14 +30,19 @@ namespace Slot_Machine
             while (remainingMoney > 0)
             {
                 Console.WriteLine($"Balance ${remainingMoney}");
+
                 char lineType = uiMethods.GetLineType();
                 int linesToPlay = uiMethods.GetLinesToPlay(lineType, remainingMoney);
+
                 uiMethods.WaitForSpin();
                 remainingMoney -= linesToPlay;
                 int winnings = LogicMethods.CalculateWinnings(slots, lineType, linesToPlay);
+
                 uiMethods.DisplaySlots(slots);
                 remainingMoney += winnings;
+
                 Console.WriteLine($"You have won ${winnings}. Current Balance: ${remainingMoney}");
+
                 if (remainingMoney == 0)
                 {
                     Console.WriteLine("You Lose! Would you like to insert more money or press any key to exit?");
