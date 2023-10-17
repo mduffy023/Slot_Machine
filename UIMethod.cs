@@ -113,11 +113,8 @@ namespace Slot_Machine
         /// </summary>
         public static void WaitForSpin()
         {
-            Console.WriteLine("Press Enter to start spin");
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter)
-            {
-                Console.WriteLine("Please only press Enter.");
-            }
+            Console.WriteLine("Press any key to start spin");
+            Console.ReadKey(true);       
         }
 
         /// <summary>
