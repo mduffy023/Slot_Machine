@@ -11,7 +11,6 @@
 
             while (remainingMoney > 0)
             {
-
                 remainingMoney = UIMethods.DisplayBalance(remainingMoney);
 
                 char lineType = UIMethods.GetLineType();

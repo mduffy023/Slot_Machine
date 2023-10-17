@@ -88,31 +88,21 @@
             return lineType;
         }
 
+
         /// <summary>
-        /// Determines the number of lines a player wishes to play in a game based on the type of line (diagonal or other) 
-        /// and the amount of money remaining. The method prompts the user to input their choice and validates this input 
-        /// to ensure it's a valid integer within the allowed range and does not exceed the player's remaining money.
+        /// Interactively prompts the player to determine the number of lines they wish to play for a given game round.
+        /// The method considers the line type (diagonal or other) and the player's remaining money to ensure valid input.
         /// </summary>
-        /// <param name="lineType">The type of line the player wishes to play. 
-        /// Character value representing either diagonal lines or other types of lines.</param>
-        /// <param name="remainingMoney">The amount of money the player has remaining. 
-        /// Used to validate the player's choice does not exceed their balance.</param>
-        /// <returns>The number of lines the player wishes to play. 
-        /// Validated to be a positive integer within the allowed range and not exceeding the player's remaining money.</returns>
+        /// <param name="lineType">A character indicating the line type the player wishes to play. Can represent diagonal lines or other line types.</param>
+        /// <param name="remainingMoney">An integer representing the player's remaining money. This is used to ensure the player does not choose to play more lines than they can afford.</param>
+        /// <returns>A validated integer indicating the number of lines the player wishes to play. This value will always be positive, within the permitted range based on the line type, and will not exceed the player's available balance.</returns>
         public static int GetLinesToPlay(char lineType, int remainingMoney)
         {
             int minLinesToPlay = LogicMethods.GetMinLinesToPlay(lineType);
             int maxLinesToPlay = LogicMethods.GetMaxLinesToPlay(lineType);
-            if (lineType == LogicMethods.LINE_TYPE_DIAGONAL)
-            {
-                Console.WriteLine("");
-                Console.WriteLine($"Choose the number of diagonal lines you would like to play (1 for left diagonal, 2 for both): ");
-            }
-            else
-            {
-                Console.WriteLine("");
-                Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
-            }
+
+            Console.WriteLine("");
+            Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
 
             int linesToPlay;
             while (true)
@@ -126,14 +116,14 @@
                     continue;
                 }
 
-                if (linesToPlay >= 1 && linesToPlay <= maxLinesToPlay && linesToPlay <= remainingMoney)
+                if (linesToPlay >= minLinesToPlay && linesToPlay <= maxLinesToPlay && linesToPlay <= remainingMoney)
                 {
                     break;
                 }
                 else
                 {
                     Console.WriteLine("");
-                    Console.WriteLine($"Invalid input. Please enter a number 1 to {maxLinesToPlay}, and ensure you have enough balance.");
+                    Console.WriteLine($"Invalid input. Please enter a number {minLinesToPlay} to {maxLinesToPlay}, and ensure you have enough balance.");
                 }
             }
             return linesToPlay;

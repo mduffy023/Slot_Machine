@@ -15,31 +15,57 @@
         public static readonly Random rand = new Random();
 
         /// <summary>
-        /// Gets the minimum number of lines to play based on the selected line type.
+        /// Determines the minimum number of lines a player needs to play based on the selected line type.
         /// </summary>
-        /// <param name="lineType">The type of line chosen by the player (horizontal, vertical, or diagonal).</param>
-        /// <returns>The minimum number of lines to play.</returns>
+        /// <param name="lineType">A character representing the chosen line type by the player. Expected values are LINE_TYPE_HORIZONTAL, LINE_TYPE_VERTICAL, or LINE_TYPE_DIAGONAL.</param>
+        /// <returns>Returns the constant MIN_LINE_AMOUNT if a valid line type is provided.</returns>
+        /// <exception cref="ArgumentException">Throws an exception if an invalid line type is provided.</exception>
         public static int GetMinLinesToPlay(char lineType)
         {
-          return lineType == LINE_TYPE_DIAGONAL ? MIN_LINE_AMOUNT_DIAGONAL_PLAY : MIN_LINE_AMOUNT;
-        }
-
-        // <summary>
-        /// Gets the maximum number of lines to play based on the selected line type and the dimensions of the slot machine.
-        /// </summary>
-        /// <param name="lineType">The type of line chosen by the player (horizontal, vertical, or diagonal).</param>
-        /// <returns>The maximum number of lines to play.</returns>
-        public static int GetMaxLinesToPlay(char lineType)
-        {
-            return Math.Max(ROWS, COLUMNS);
-        }
+          if(lineType == LINE_TYPE_HORIZONTAL || lineType == LINE_TYPE_VERTICAL || lineType == LINE_TYPE_DIAGONAL)
+            {
+                return MIN_LINE_AMOUNT;
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid line type: {lineType}");
+            }       
+       }
 
         /// <summary>
-        ///  Fills the slots with random vaules 
+        /// Determines the maximum number of lines a player can play based on the selected line type and the structure of the slot machine.
         /// </summary>
-        /// <param name="slots">2D array filled with random vaules</param>
-        /// <param name="rand">Random object that generates the random values</param>
-        public static int[,] FillSlots()  // Updated method signature
+        /// <param name="lineType">A character representing the chosen line type by the player. Expected values are LINE_TYPE_HORIZONTAL, LINE_TYPE_VERTICAL, or LINE_TYPE_DIAGONAL.</param>
+        /// <returns>
+        /// Returns the number of ROWS if lineType is LINE_TYPE_HORIZONTAL, the number of COLUMNS if lineType is LINE_TYPE_VERTICAL, and 2 for LINE_TYPE_DIAGONAL (accounting for both left-to-right and right-to-left diagonals).
+        /// </returns>
+        /// <exception cref="ArgumentException">Throws an exception if an invalid line type is provided.</exception>
+        public static int GetMaxLinesToPlay(char lineType)
+        {
+            if (lineType == LINE_TYPE_HORIZONTAL)
+            {
+                return ROWS;
+            }
+            else if (lineType == LINE_TYPE_VERTICAL)
+            {
+                return COLUMNS;
+            }
+            else if (lineType == LINE_TYPE_DIAGONAL)
+            {
+                return 2; // Left diagonal and right diagonal.
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid line type: {lineType}");
+            }
+        }
+        
+    /// <summary>
+    ///  Fills the slots with random vaules 
+    /// </summary>
+    /// <param name="slots">2D array filled with random vaules</param>
+    /// <param name="rand">Random object that generates the random values</param>
+    public static int[,] FillSlots()  // Updated method signature
         {
             int[,] slots = new int[ROWS, COLUMNS];
             for (int indexRow = 0; indexRow < ROWS; indexRow++)
