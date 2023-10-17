@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Slot_Machine
+﻿namespace Slot_Machine
 {
     public class UIMethods
     {
@@ -31,6 +29,31 @@ namespace Slot_Machine
             Console.WriteLine("");
             Console.WriteLine("How much money would you like to insert? ");
             int remainingMoney = Convert.ToInt32(Console.ReadLine());
+            return remainingMoney;
+        }
+
+        public static int DisplayBalance(int remainingMoney)
+        {
+            Console.WriteLine("");
+            Console.WriteLine($"Balance ${remainingMoney}");
+            return remainingMoney;
+        }
+
+        public static int DisplayWinningsAndBalance(int winnings, int remainingMoney)
+        {
+            Console.WriteLine("");
+            Console.WriteLine($"You have won ${winnings}. Current Balance: ${remainingMoney}");
+
+            if (remainingMoney == 0)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("You Lose! Would you like to insert more money or press any key to exit?");
+                if (int.TryParse(Console.ReadLine(), out int additionalMoney))
+                {
+                    remainingMoney += additionalMoney;
+                }
+            }
+            System.Threading.Thread.Sleep(500);
             return remainingMoney;
         }
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Slot_Machine
+﻿namespace Slot_Machine
 {
     public class LogicMethods
     {
