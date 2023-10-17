@@ -28,6 +28,7 @@ namespace Slot_Machine
         /// </returns>
         public static int GetInitialMoney()
         {
+            Console.WriteLine("");
             Console.WriteLine("How much money would you like to insert? ");
             int remainingMoney = Convert.ToInt32(Console.ReadLine());
             return remainingMoney;
@@ -47,14 +48,17 @@ namespace Slot_Machine
             char lineType;
             while (true)
             {
+                Console.WriteLine("");
                 Console.WriteLine($"Choose the line type you would like to play: {LogicMethods.LINE_TYPE_HORIZONTAL} for Horizontal, {LogicMethods.LINE_TYPE_VERTICAL} for Vertical, and {LogicMethods.LINE_TYPE_DIAGONAL} for Diagonal");
-                lineType = char.ToUpper(Console.ReadKey(true).KeyChar);
+                Console.WriteLine("");
+               lineType = char.ToUpper(Console.ReadKey(true).KeyChar);
                 if (lineType == LogicMethods.LINE_TYPE_HORIZONTAL || lineType == LogicMethods.LINE_TYPE_VERTICAL || (lineType == LogicMethods.LINE_TYPE_DIAGONAL && LogicMethods.ROWS >= 2))
                 {
                     break;
                 }
                 else
                 {
+                    Console.WriteLine("");
                     Console.WriteLine("Invalid input. Please enter H, V, or D.");
                 }
             }
@@ -78,10 +82,12 @@ namespace Slot_Machine
             int maxLinesToPlay = LogicMethods.GetMaxLinesToPlay(lineType);
             if (lineType == LogicMethods.LINE_TYPE_DIAGONAL)
             {
+                Console.WriteLine("");
                 Console.WriteLine($"Choose the number of diagonal lines you would like to play (1 for left diagonal, 2 for both): ");
             }
             else
             {
+                Console.WriteLine("");
                 Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
             }
 
@@ -92,6 +98,7 @@ namespace Slot_Machine
 
                 if (!isValidInput)
                 {
+                    Console.WriteLine("");
                     Console.WriteLine("Please enter a valid integer.");
                     continue;
                 }
@@ -102,6 +109,7 @@ namespace Slot_Machine
                 }
                 else
                 {
+                    Console.WriteLine("");
                     Console.WriteLine($"Invalid input. Please enter a number 1 to {maxLinesToPlay}, and ensure you have enough balance.");
                 }
             }
@@ -113,7 +121,9 @@ namespace Slot_Machine
         /// </summary>
         public static void WaitForSpin()
         {
+            Console.WriteLine("");
             Console.WriteLine("Press any key to start spin");
+            Console.WriteLine("");
             Console.ReadKey(true);       
         }
 
