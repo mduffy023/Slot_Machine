@@ -52,7 +52,7 @@
             }
             else if (lineType == LINE_TYPE_DIAGONAL)
             {
-                return 2; // Left diagonal and right diagonal.
+                return MIN_LINE_AMOUNT_DIAGONAL_PLAY; // Left diagonal and right diagonal.
             }
             else
             {
