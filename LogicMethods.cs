@@ -162,6 +162,21 @@
             return winAmount;
         }
 
+        public static int getNewBetAmount(int winnings, int remainingMoney)
+        {
+            if (remainingMoney == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You Lose! Would you like to insert more money or press any key to exit?");
+                if (int.TryParse(Console.ReadLine(), out int additionalMoney))
+                {
+                    remainingMoney += additionalMoney;
+                }
+            }
+            System.Threading.Thread.Sleep(500);
+            return remainingMoney;
+        }
+
         /// <summary>
         /// Checks diagonal lines for winning combinations in the slot machine grid.
         /// </summary>
