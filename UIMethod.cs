@@ -75,7 +75,7 @@
                 Console.WriteLine($"Choose the line type you would like to play: {LogicMethods.LINE_TYPE_HORIZONTAL} for Horizontal, {LogicMethods.LINE_TYPE_VERTICAL} for Vertical, and {LogicMethods.LINE_TYPE_DIAGONAL} for Diagonal");
                 Console.WriteLine("");
                lineType = char.ToUpper(Console.ReadKey(true).KeyChar);
-                if (lineType == LogicMethods.LINE_TYPE_HORIZONTAL || lineType == LogicMethods.LINE_TYPE_VERTICAL || (lineType == LogicMethods.LINE_TYPE_DIAGONAL && LogicMethods.ROWS >= 2))
+                if (lineType == LogicMethods.LINE_TYPE_HORIZONTAL || lineType == LogicMethods.LINE_TYPE_VERTICAL || (lineType == LogicMethods.LINE_TYPE_DIAGONAL && LogicMethods.ROW_COUNT >= 2))
                 {
                     break;
                 }

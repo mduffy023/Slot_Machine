@@ -9,8 +9,8 @@
         public const int SLOT_MAX_VALUE = 3;
         public const int MIN_LINE_AMOUNT = 1;
         public const int MIN_LINE_AMOUNT_DIAGONAL_PLAY = 2;
-        public const int ROWS = 3;
-        public const int COLUMNS = 3;
+        public const int ROW_COUNT = 3;
+        public const int COLUMN_COUNT = 3;
 
         public static readonly Random rand = new Random();
 
@@ -44,11 +44,11 @@
         {
             if (lineType == LINE_TYPE_HORIZONTAL)
             {
-                return ROWS;
+                return ROW_COUNT;
             }
             else if (lineType == LINE_TYPE_VERTICAL)
             {
-                return COLUMNS;
+                return COLUMN_COUNT;
             }
             else if (lineType == LINE_TYPE_DIAGONAL)
             {
@@ -67,10 +67,10 @@
     /// <param name="rand">Random object that generates the random values</param>
     public static int[,] FillSlots()  // Updated method signature
         {
-            int[,] slots = new int[ROWS, COLUMNS];
-            for (int indexRow = 0; indexRow < ROWS; indexRow++)
+            int[,] slots = new int[ROW_COUNT, COLUMN_COUNT];
+            for (int indexRow = 0; indexRow < ROW_COUNT; indexRow++)
             {
-                for (int indexCol = 0; indexCol < COLUMNS; indexCol++)
+                for (int indexCol = 0; indexCol < COLUMN_COUNT; indexCol++)
                 {
                     slots[indexRow, indexCol] = rand.Next(SLOT_MIN_VALUE, SLOT_MAX_VALUE + 1);  // Use global Random object
                 }
@@ -118,7 +118,7 @@
             for (int indexRow = 0; indexRow < linesToPlay; indexRow++)
             {
                 bool allEqual = true;
-                for (int indexCol = 0; indexCol < COLUMNS - 1; indexCol++)
+                for (int indexCol = 0; indexCol < COLUMN_COUNT - 1; indexCol++)
                 {
                     if (slots[indexRow, indexCol] != slots[indexRow, indexCol + 1])
                     {
@@ -146,7 +146,7 @@
             for (int indexCol = 0; indexCol < linesToPlay; indexCol++)
             {
                 bool allEqual = true;
-                for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                for (int indexRow = 0; indexRow < ROW_COUNT - 1; indexRow++)
                 {
                     if (slots[indexRow, indexCol] != slots[indexRow + 1, indexCol])
                     {
@@ -175,7 +175,7 @@
             if (linesToPlay >= 1)
             {
                 bool firstDiagonalEqual = true;
-                for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                for (int indexRow = 0; indexRow < ROW_COUNT - 1; indexRow++)
                 {
                     if (slots[indexRow, indexRow] != slots[indexRow + 1, indexRow + 1])
                     {
@@ -192,9 +192,9 @@
             if (linesToPlay == 2)
             {
                 bool secondDiagonalEqual = true;
-                for (int indexRow = 0; indexRow < ROWS - 1; indexRow++)
+                for (int indexRow = 0; indexRow < ROW_COUNT - 1; indexRow++)
                 {
-                    if (slots[indexRow, COLUMNS - 1 - indexRow] != slots[indexRow + 1, COLUMNS - 2 - indexRow])
+                    if (slots[indexRow, COLUMN_COUNT - 1 - indexRow] != slots[indexRow + 1, COLUMN_COUNT - 2 - indexRow])
                     {
                         secondDiagonalEqual = false;
                         break;
