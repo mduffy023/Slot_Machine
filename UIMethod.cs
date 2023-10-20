@@ -26,7 +26,7 @@
         /// </returns>
         public static int GetInitialMoney()
         {
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine("How much money would you like to insert? ");
             int remainingMoney = Convert.ToInt32(Console.ReadLine());
             return remainingMoney;
@@ -34,19 +34,19 @@
 
         public static int DisplayBalance(int remainingMoney)
         {
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine($"Balance ${remainingMoney}");
             return remainingMoney;
         }
 
         public static int DisplayWinningsAndBalance(int winnings, int remainingMoney)
         {
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine($"You have won ${winnings}. Current Balance: ${remainingMoney}");
 
             if (remainingMoney == 0)
             {
-                Console.WriteLine("");
+                Console.WriteLine();
                 Console.WriteLine("You Lose! Would you like to insert more money or press any key to exit?");
                 if (int.TryParse(Console.ReadLine(), out int additionalMoney))
                 {
@@ -71,9 +71,9 @@
             char lineType;
             while (true)
             {
-                Console.WriteLine("");
+                Console.WriteLine();
                 Console.WriteLine($"Choose the line type you would like to play: {LogicMethods.LINE_TYPE_HORIZONTAL} for Horizontal, {LogicMethods.LINE_TYPE_VERTICAL} for Vertical, and {LogicMethods.LINE_TYPE_DIAGONAL} for Diagonal");
-                Console.WriteLine("");
+                Console.WriteLine();
                lineType = char.ToUpper(Console.ReadKey(true).KeyChar);
                 if (lineType == LogicMethods.LINE_TYPE_HORIZONTAL || lineType == LogicMethods.LINE_TYPE_VERTICAL || (lineType == LogicMethods.LINE_TYPE_DIAGONAL && LogicMethods.ROW_COUNT >= 2))
                 {
@@ -81,7 +81,7 @@
                 }
                 else
                 {
-                    Console.WriteLine("");
+                    Console.WriteLine();
                     Console.WriteLine("Invalid input. Please enter H, V, or D.");
                 }
             }
@@ -101,7 +101,7 @@
             int minLinesToPlay = LogicMethods.GetMinLinesToPlay(lineType);
             int maxLinesToPlay = LogicMethods.GetMaxLinesToPlay(lineType);
 
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine($"Choose the number of lines you would like to play ({minLinesToPlay} to {maxLinesToPlay}) ");
 
             int linesToPlay;
@@ -111,7 +111,7 @@
 
                 if (!isValidInput)
                 {
-                    Console.WriteLine("");
+                    Console.WriteLine();
                     Console.WriteLine("Please enter a valid integer.");
                     continue;
                 }
@@ -122,7 +122,7 @@
                 }
                 else
                 {
-                    Console.WriteLine("");
+                    Console.WriteLine();
                     Console.WriteLine($"Invalid input. Please enter a number {minLinesToPlay} to {maxLinesToPlay}, and ensure you have enough balance.");
                 }
             }
@@ -134,9 +134,9 @@
         /// </summary>
         public static void WaitForSpin()
         {
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine("Press any key to start spin");
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.ReadKey(true);       
         }
 
