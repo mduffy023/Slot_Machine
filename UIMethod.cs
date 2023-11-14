@@ -71,11 +71,6 @@
                 {
                     break;
                 }
-                else
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Invalid input. Please enter H, V, or D.");
-                }
             }
             return lineType;
         }
@@ -110,11 +105,6 @@
                 if (linesToPlay >= minLinesToPlay && linesToPlay <= maxLinesToPlay && linesToPlay <= remainingMoney)
                 {
                     break;
-                }
-                else
-                {
-                    Console.WriteLine();
-                    Console.WriteLine($"Invalid input. Please enter a number {minLinesToPlay} to {maxLinesToPlay}, and ensure you have enough balance.");
                 }
             }
             return linesToPlay;
