@@ -162,6 +162,7 @@
             return winAmount;
         }
 
+        
         public static int getNewBetAmount(int winnings, int remainingMoney)
         {
             if (remainingMoney == 0)
@@ -187,7 +188,7 @@
         {
             int winAmount = 0;
 
-            if (linesToPlay >= 1)
+            if (linesToPlay >= MIN_LINE_AMOUNT)
             {
                 bool firstDiagonalEqual = true;
                 for (int indexRow = 0; indexRow < ROW_COUNT - 1; indexRow++)
@@ -204,7 +205,7 @@
                 }
             }
 
-            if (linesToPlay == 2)
+            if (linesToPlay == MIN_LINE_AMOUNT_DIAGONAL_PLAY)
             {
                 bool secondDiagonalEqual = true;
                 for (int indexRow = 0; indexRow < ROW_COUNT - 1; indexRow++)

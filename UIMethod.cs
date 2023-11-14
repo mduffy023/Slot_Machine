@@ -32,6 +32,8 @@
             return remainingMoney;
         }
 
+        //gives Balance of players money 
+        //not the same as DisplayWinningsAndBalance
         public static int DisplayBalance(int remainingMoney)
         {
             Console.WriteLine();
@@ -39,6 +41,7 @@
             return remainingMoney;
         }
 
+        //Displays the winnings and remainingMoney
         public static int DisplayWinningsAndBalance(int winnings, int remainingMoney)
         {
             Console.WriteLine();
@@ -76,7 +79,6 @@
             }
             return lineType;
         }
-
 
         /// <summary>
         /// Interactively prompts the player to determine the number of lines they wish to play for a given game round.
