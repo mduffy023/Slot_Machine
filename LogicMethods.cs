@@ -42,30 +42,28 @@
         /// <exception cref="ArgumentException">Throws an exception if an invalid line type is provided.</exception>
         public static int GetMaxLinesToPlay(char lineType)
         {
-            if (lineType == LINE_TYPE_HORIZONTAL)
+            switch(lineType)
             {
-                return ROW_COUNT;
-            }
-            else if (lineType == LINE_TYPE_VERTICAL)
-            {
-                return COLUMN_COUNT;
-            }
-            else if (lineType == LINE_TYPE_DIAGONAL)
-            {
-                return MIN_LINE_AMOUNT_DIAGONAL_PLAY; // Left diagonal and right diagonal.
-            }
-            else
-            {
-                throw new ArgumentException($"Invalid line type: {lineType}");
+                case LINE_TYPE_HORIZONTAL:
+                    return ROW_COUNT;      
+
+                case LINE_TYPE_VERTICAL:
+                    return COLUMN_COUNT;        
+                    
+                case LINE_TYPE_DIAGONAL: 
+                    return MIN_LINE_AMOUNT_DIAGONAL_PLAY;
+
+                    default: 
+                    throw new ArgumentException($"Invalid line type: {lineType}");
             }
         }
-        
-    /// <summary>
-    ///  Fills the slots with random vaules 
-    /// </summary>
-    /// <param name="slots">2D array filled with random vaules</param>
-    /// <param name="rand">Random object that generates the random values</param>
-    public static int[,] FillSlots()  // Updated method signature
+
+        /// <summary>
+        ///  Fills the slots with random vaules 
+        /// </summary>
+        /// <param name="slots">2D array filled with random vaules</param>
+        /// <param name="rand">Random object that generates the random values</param>
+        public static int[,] FillSlots()  // Updated method signature
         {
             int[,] slots = new int[ROW_COUNT, COLUMN_COUNT];
             for (int indexRow = 0; indexRow < ROW_COUNT; indexRow++)
@@ -90,19 +88,20 @@
         {
             int winnings = 0;
 
-            if (lineType == LINE_TYPE_HORIZONTAL)
+            switch (lineType)
             {
-                winnings = CheckHorizontal(slots, linesToPlay);
-            }
-            if (lineType == LINE_TYPE_VERTICAL)
-            {
-                winnings += CheckVertical(slots, linesToPlay);
-            }
-            if (lineType == LINE_TYPE_DIAGONAL)
-            {
-                winnings += CheckDiagonal(slots, linesToPlay);
-            }
+                case LINE_TYPE_HORIZONTAL:
+                    winnings = CheckHorizontal(slots, linesToPlay);
+                    break;
 
+                case LINE_TYPE_VERTICAL:
+                     winnings += CheckVertical(slots, linesToPlay);
+                    break;
+
+                case LINE_TYPE_DIAGONAL:
+                     winnings += CheckDiagonal(slots, linesToPlay);
+                    break;
+            }
             return winnings;
         }
 
@@ -162,7 +161,11 @@
             return winAmount;
         }
 
-        
+        /// <summary>
+        /// give the Remaining Money to the player
+        /// each time they choose to play 
+        /// </summary>
+        /// <returns>the total remaining money</returns>
         public static int getNewBetAmount(int winnings, int remainingMoney)
         {
             if (remainingMoney == 0)
